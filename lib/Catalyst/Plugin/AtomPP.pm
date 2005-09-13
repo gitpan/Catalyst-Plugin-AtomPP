@@ -4,13 +4,7 @@ use Catalyst::Utils;
 use XML::Atom;
 use XML::Atom::Entry;
 
-our $VERSION = '0.01';
-
-{
-    package Catalyst::Request;
-    use base 'Class::Accessor::Fast';
-    __PACKAGE__->mk_accessors(qw/entry/);
-}
+our $VERSION = '0.02';
 
 =head1 NAME
 
@@ -26,13 +20,16 @@ Catalyst::Plugin::AtomPP - Dispatch AtomPP methods with Catalyst.
   }
 
   sub create_entry : Atom {
-      my ($self, $c) = @_;
+      my ($self, $c, $entry) = @_;
+      # $entry is XML::Atom Object from Request content
 
-      my $atom_entry = $c->req->entry; # XML::Atom::Entry Obj
+      ...
   }
 
   sub retrieve_entry : Atom {
       my ($self, $c) = @_;
+
+      ...
   }
 
   sub update_entry : Atom {
@@ -85,24 +82,26 @@ sub atom {
         my ($pp, $res);
 
         for my $attr (@{Catalyst::Utils::attrs($code)}) {
-            $c->log->debug($attr);
-            $pp++ if $attr eq 'Atom';
+            $pp++ if $attr eq 'Remote';
         }
 
         if ($pp) {
+            my $content = $c->req->body;
             my $entry;
-            $entry = XML::Atom::Entry->new($c->req->body) if $c->req->body;
+            $entry = XML::Atom::Entry->new(\$content) if $content;
             if ($c->req->body and !$entry) {
                 $c->log->debug("Request body is not well-formed.");
                 $c->res->status(415);
             } else {
-                $c->req->entry($entry) if $entry;
                 $class = $c->components->{$class} || $class;
+                my @args = @{$c->req->args};
+                $c->req->args([$entry]) if $entry;
                 $c->actions->{reverse}->{$code} ||= "$class->$method";
                 $c->state($c->execute($class, $code));
 
                 $c->res->content_type('application/xml; charset=utf-8');
                 $c->res->body($c->state);
+                $c->req->args(\@args);
             }
         }
 

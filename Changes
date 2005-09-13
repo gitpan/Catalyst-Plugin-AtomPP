@@ -1,5 +1,12 @@
 Revision history for Perl module Catalyst::Plugin::AtomPP
 
+0.02 Mon Sep 13 19:03:33 2005 +0900
+    - Change atom methods's attributes 'Atom' to 'Remote'
+    - Change XML::Atom::Entry object location '$c->req->entry' to method 3rd argument
+        - Thanks sri.
+
+    - Bug fix.
+
 0.01 Mon Sep 13 16:44:12 2005 +0900
     - initial version.
 

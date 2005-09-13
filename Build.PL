@@ -7,7 +7,7 @@ Module::Build->new
       license           => 'perl',
       requires          => {
           Catalyst => '5.30',
-          Perl     => '5.6.0',
+          Perl     => '5.8.0',
       },
       dist_author       => 'Daisuke Murase <typester@cpan.org>',
     )->create_build_script;
