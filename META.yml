@@ -1,0 +1,18 @@
+---
+name: Catalyst-Plugin-AtomPP
+version: 0.01
+author:
+  - Daisuke Murase <typester@cpan.org>
+abstract: Dispatch AtomPP methods with Catalyst.
+license: perl
+requires:
+  Catalyst: 5.30
+  Perl: 5.6.0
+provides:
+  Catalyst::Plugin::AtomPP:
+    file: lib/Catalyst/Plugin/AtomPP.pm
+    version: 0.01
+  Catalyst::Request:
+    file: lib/Catalyst/Plugin/AtomPP.pm
+    version: 0.01
+generated_by: Module::Build version 0.2611

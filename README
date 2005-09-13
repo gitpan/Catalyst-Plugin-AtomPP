@@ -1,0 +1,48 @@
+NAME
+    Catalyst::Plugin::AtomPP - Dispatch AtomPP methods with Catalyst.
+
+SYNOPSIS
+      use Catalyst qw/AtomPP/;
+
+      sub entry : Local {
+          my ($self, $c) = @_;
+          $c->atom;             # dispatch AtomPP methods.
+      }
+
+      sub create_entry : Atom {
+          my ($self, $c) = @_;
+
+          my $atom_entry = $c->req->entry; # XML::Atom::Entry Obj
+      }
+
+      sub retrieve_entry : Atom {
+          my ($self, $c) = @_;
+      }
+
+      sub update_entry : Atom {
+          ...
+      }
+
+      sub delete_entry : Atom {
+          ...
+      }
+
+DESCRIPTION
+    This plugin allows you to dispatch AtomPP methods with Catalyst.
+
+    Require other authentication plugin, if needed.
+    (Authentication::CDBI::Basic, WSSE, or so)
+
+METHODS
+    atom
+
+SEE ALSO
+    Catalyst, Catalyst::Plugin::XMLRPC.
+
+AUTHOR
+    Daisuke Murase, <typester@cpan.org>
+
+COPYRIGHT
+    This program is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
