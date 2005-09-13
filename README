@@ -9,21 +9,24 @@ SYNOPSIS
           $c->atom;             # dispatch AtomPP methods.
       }
 
-      sub create_entry : Atom {
-          my ($self, $c) = @_;
+      sub create_entry : Remote {
+          my ($self, $c, $entry) = @_;
+          # $entry is XML::Atom Object from Request content
 
-          my $atom_entry = $c->req->entry; # XML::Atom::Entry Obj
-      }
-
-      sub retrieve_entry : Atom {
-          my ($self, $c) = @_;
-      }
-
-      sub update_entry : Atom {
           ...
       }
 
-      sub delete_entry : Atom {
+      sub retrieve_entry : Remote {
+          my ($self, $c) = @_;
+
+          ...
+      }
+
+      sub update_entry : Remote {
+          ...
+      }
+
+      sub delete_entry : Remote {
           ...
       }
 

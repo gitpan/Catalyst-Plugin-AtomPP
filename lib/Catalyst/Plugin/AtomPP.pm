@@ -19,24 +19,24 @@ Catalyst::Plugin::AtomPP - Dispatch AtomPP methods with Catalyst.
       $c->atom;             # dispatch AtomPP methods.
   }
 
-  sub create_entry : Atom {
+  sub create_entry : Remote {
       my ($self, $c, $entry) = @_;
       # $entry is XML::Atom Object from Request content
 
       ...
   }
 
-  sub retrieve_entry : Atom {
+  sub retrieve_entry : Remote {
       my ($self, $c) = @_;
 
       ...
   }
 
-  sub update_entry : Atom {
+  sub update_entry : Remote {
       ...
   }
 
-  sub delete_entry : Atom {
+  sub delete_entry : Remote {
       ...
   }
 
