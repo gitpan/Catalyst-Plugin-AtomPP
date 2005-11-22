@@ -3,11 +3,9 @@ use Module::Build;
 
 Module::Build->new
     ( module_name       => 'Catalyst::Plugin::AtomPP',
-      dist_version_from => 'lib/Catalyst/Plugin/AtomPP.pm',
       license           => 'perl',
       requires          => {
-          Catalyst => '5.30',
+          Catalyst => '5.50',
           'XML::Atom' => 0,
       },
-      dist_author       => 'Daisuke Murase <typester@cpan.org>',
     )->create_build_script;

@@ -36,6 +36,20 @@ DESCRIPTION
     Require other authentication plugin, if needed.
     (Authentication::CDBI::Basic, WSSE, or so)
 
+AUTO RESPONSE FUTURE
+    If you set true value at $c->config->{atompp}->{auto_response}, AtomPP
+    plugin set automatically $c->res->status or $c->res->body by value that
+    Remote method returned.
+
+    If your remote method return /^\d{3}$/ ( 200 or so ), AtomPP plugin
+    execute $c->res->status( 200 );
+
+    Or return XML::Atom::Entry or XML::Atom::Feed object, execute
+    $c->res->body( $xmlatom_obj->as_xml );
+
+    Or other not false value returned, then execute $c->res->body(
+    $returnd_value );
+
 METHODS
     atom
 
