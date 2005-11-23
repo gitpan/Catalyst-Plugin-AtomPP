@@ -33,10 +33,19 @@ SYNOPSIS
 DESCRIPTION
     This plugin allows you to dispatch AtomPP methods with Catalyst.
 
-    Require other authentication plugin, if needed.
+    Remote method decided by HTTP Request Method. It's CRUD Model.
+
+    ex) GET /path/to/entry then ritrieve_entry is called. POST
+    /path/to/entry then create_entry is called.
+
+    If you want to decide remote method's suffix, you can set it like
+    $c->atom('foobar'). Then (create|ritrieve|update|delete)_foobar method
+    is called.
+
+    May require other authentication plugin, if needed.
     (Authentication::CDBI::Basic, WSSE, or so)
 
-AUTO RESPONSE FUTURE
+AUTO RESPONSE FEATURE
     If you set true value at $c->config->{atompp}->{auto_response}, AtomPP
     plugin set automatically $c->res->status or $c->res->body by value that
     Remote method returned.

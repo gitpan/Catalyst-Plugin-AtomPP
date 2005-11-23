@@ -5,7 +5,7 @@ use Catalyst::Action;
 use Catalyst::Utils;
 use XML::Atom::Entry;
 
-our $VERSION = '0.05_01';
+our $VERSION = '0.05_02';
 
 __PACKAGE__->mk_accessors(qw/_request_body_raw/);
 
@@ -47,10 +47,19 @@ Catalyst::Plugin::AtomPP - Dispatch AtomPP methods with Catalyst.
 
 This plugin allows you to dispatch AtomPP methods with Catalyst.
 
-Require other authentication plugin, if needed.
+Remote method decided by HTTP Request Method. It's CRUD Model.
+
+ex)
+  GET  /path/to/entry then ritrieve_entry is called.
+  POST /path/to/entry then create_entry is called.
+
+If you want to decide remote method's suffix, you can set it like $c->atom('foobar').
+Then (create|ritrieve|update|delete)_foobar method is called.
+
+May require other authentication plugin, if needed.
 (Authentication::CDBI::Basic, WSSE, or so)
 
-=head1 AUTO RESPONSE FUTURE
+=head1 AUTO RESPONSE FEATURE
 
 If you set true value at $c->config->{atompp}->{auto_response}, AtomPP plugin set automatically $c->res->status or $c->res->body by value that Remote method returned.
 
@@ -63,17 +72,6 @@ Or other not false value returned, then execute $c->res->body( $returnd_value );
 =head1 METHODS
 
 =over 4
-
-=cut
-
-sub prepare_body_chunk {
-    my ( $c, $chunk ) = @_;
-
-    my $body = $c->request->{_body};
-    $body->add( $chunk );
-
-    $c->_request_body_raw( ( $c->_request_body_raw || '' ) . $chunk );
-}
 
 =item atom
 
@@ -111,11 +109,11 @@ sub atom {
         }
 
         if ($pp) {
-            my $content = $c->_request_body_raw;
+            my $content = $c->req->body;
             my $entry;
 
             eval{
-                $entry = XML::Atom::Entry->new( \$content );
+                $entry = XML::Atom::Entry->new( $content );
             };
 
             $c->log->debug( $@ ) if ($c->debug and $@);
