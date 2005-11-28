@@ -1,13 +1,10 @@
 package Catalyst::Plugin::AtomPP;
 use strict;
-use base qw/Class::Accessor::Fast/;
 use Catalyst::Action;
 use Catalyst::Utils;
 use XML::Atom::Entry;
 
-our $VERSION = '0.05_02';
-
-__PACKAGE__->mk_accessors(qw/_request_body_raw/);
+our $VERSION = '0.05_03';
 
 =head1 NAME
 
@@ -50,11 +47,11 @@ This plugin allows you to dispatch AtomPP methods with Catalyst.
 Remote method decided by HTTP Request Method. It's CRUD Model.
 
 ex)
-  GET  /path/to/entry then ritrieve_entry is called.
+  GET  /path/to/entry then retrieve_entry is called.
   POST /path/to/entry then create_entry is called.
 
 If you want to decide remote method's suffix, you can set it like $c->atom('foobar').
-Then (create|ritrieve|update|delete)_foobar method is called.
+Then (create|retrieve|update|delete)_foobar method is called.
 
 May require other authentication plugin, if needed.
 (Authentication::CDBI::Basic, WSSE, or so)
@@ -113,7 +110,7 @@ sub atom {
             my $entry;
 
             eval{
-                $entry = XML::Atom::Entry->new( $content );
+                $entry = XML::Atom::Entry->new( ref $content ? $content : \$content );
             };
 
             $c->log->debug( $@ ) if ($c->debug and $@);

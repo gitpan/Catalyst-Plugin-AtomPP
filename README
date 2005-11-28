@@ -35,11 +35,11 @@ DESCRIPTION
 
     Remote method decided by HTTP Request Method. It's CRUD Model.
 
-    ex) GET /path/to/entry then ritrieve_entry is called. POST
+    ex) GET /path/to/entry then retrieve_entry is called. POST
     /path/to/entry then create_entry is called.
 
     If you want to decide remote method's suffix, you can set it like
-    $c->atom('foobar'). Then (create|ritrieve|update|delete)_foobar method
+    $c->atom('foobar'). Then (create|retrieve|update|delete)_foobar method
     is called.
 
     May require other authentication plugin, if needed.

@@ -1,7 +1,10 @@
 Revision history for Perl module Catalyst::Plugin::AtomPP
 
+0.05_03 2005-11-28T09:35:36+09:00
+    - fixed pod typos (thanks to Kenny Gatdula)
+
 0.05_02 2005-11-23T15:08:17+09:00
-    - fixed pod (thx to kentaro)
+    - fixed pod (thanks to kentaro)
     - removed prepare_body_chunk hack. and so this module requres HTTP::Body 0.06 or higher.
 
 0.05_01 2005-11-22T20:50:25+09:00

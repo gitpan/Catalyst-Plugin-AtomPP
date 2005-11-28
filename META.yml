@@ -1,6 +1,6 @@
 ---
 name: Catalyst-Plugin-AtomPP
-version: 0.05_02
+version: 0.05_03
 author:
   - 'Daisuke Murase, E<lt>typester@cpan.orgE<gt>'
 abstract: Dispatch AtomPP methods with Catalyst.
@@ -14,5 +14,5 @@ requires:
 provides:
   Catalyst::Plugin::AtomPP:
     file: lib/Catalyst/Plugin/AtomPP.pm
-    version: 0.05_02
+    version: 0.05_03
 generated_by: Module::Build version 0.2703
